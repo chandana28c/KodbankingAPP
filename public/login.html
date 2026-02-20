@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Kodbank - Login</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="gradient-bg">
+    <div class="card">
+      <h1>Kodbank</h1>
+      <h2>Login</h2>
+      <form id="loginForm">
+        <div class="field">
+          <label for="uname">Username</label>
+          <input type="text" id="uname" name="uname" required />
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+        <button type="submit" class="btn primary">Login</button>
+      </form>
+      <p class="helper">
+        New to Kodbank?
+        <a href="/register.html">Register</a>
+      </p>
+      <p id="loginMessage" class="message"></p>
+    </div>
+    <script src="login.js"></script>
+  </body>
+  </html>
+
