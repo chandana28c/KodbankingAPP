@@ -1,12 +1,11 @@
 const mysql = require('mysql2/promise');
 
 const pool = mysql.createPool({
-  host: 'sql.freedb.tech',
-  port: 3306,
-  user: 'freedb_chandana',
-  password: 'd&V7u$pJ7BqkKD4',
-  database: 'freedb_Kodbanking',
-  // FreeDB typically does not require client-side SSL configuration.
+  host: process.env.DB_HOST || 'sql.freedb.tech',
+  port: parseInt(process.env.DB_PORT || '3306', 10),
+  user: process.env.DB_USER || 'freedb_chandana',
+  password: process.env.DB_PASSWORD || 'd&V7u$pJ7BqkKD4',
+  database: process.env.DB_NAME || 'freedb_Kodbanking',
   connectionLimit: 10,
 });
 

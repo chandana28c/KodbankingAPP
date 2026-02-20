@@ -1,0 +1,18 @@
+# Render Blueprint - deploy Kodbank as a Web Service
+# Docs: https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: kodbank
+    runtime: node
+    plan: free
+
+    # Connect your repo; Render will run these:
+    buildCommand: npm install
+    startCommand: npm start
+
+    # Env vars: set in Render Dashboard → Environment (or here for blueprint)
+    envVars:
+      - key: NODE_ENV
+        value: production
+      # Add DB and JWT in Render Dashboard:
+      # DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME, JWT_SECRET
