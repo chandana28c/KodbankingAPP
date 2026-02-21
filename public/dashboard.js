@@ -1,5 +1,6 @@
 const checkBalanceBtn = document.getElementById('checkBalanceBtn');
 const balanceMessage = document.getElementById('balanceMessage');
+const balanceDisplay = document.getElementById('balanceDisplay');
 const confettiContainer = document.getElementById('confettiContainer');
 
 checkBalanceBtn.addEventListener('click', async () => {
@@ -26,6 +27,7 @@ checkBalanceBtn.addEventListener('click', async () => {
       maximumFractionDigits: 2,
     });
 
+    balanceDisplay.textContent = formatted;
     balanceMessage.textContent = `Your balance is: ${formatted}`;
     balanceMessage.classList.add('success');
 
@@ -41,8 +43,8 @@ function launchConfetti() {
   if (!confettiContainer) return;
   confettiContainer.innerHTML = '';
 
-  const colors = ['#f97316', '#22c55e', '#38bdf8', '#eab308', '#ec4899'];
-  const pieceCount = 150;
+  const colors = ['#0d9488', '#5a7d5a', '#7c9a9a', '#e8efe6', '#d4e8e4'];
+  const pieceCount = 120;
 
   for (let i = 0; i < pieceCount; i++) {
     const piece = document.createElement('div');
@@ -58,4 +60,3 @@ function launchConfetti() {
     }, 3000);
   }
 }
-

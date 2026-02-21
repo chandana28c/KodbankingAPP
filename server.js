@@ -193,6 +193,61 @@ async function authMiddleware(req, res, next) {
   }
 }
 
+// API: Chat (proxies to Hugging Face Inference API - Mistral 7B)
+const HF_TOKEN = process.env.HF_TOKEN || process.env.HUGGINGFACE_TOKEN;
+const HF_MODEL = 'mistralai/Mistral-7B-Instruct-v0.2';
+
+app.post('/api/chat', authMiddleware, async (req, res) => {
+  if (!HF_TOKEN) {
+    return res.status(503).json({ message: 'Chat service is not configured. Add HF_TOKEN to .env' });
+  }
+
+  const { messages } = req.body;
+  if (!Array.isArray(messages) || messages.length === 0) {
+    return res.status(400).json({ message: 'messages array is required' });
+  }
+
+  // Format messages for OpenAI-compatible chat completions
+  const systemMsg = {
+    role: 'system',
+    content: 'You are a helpful banking assistant for Kodbank. Answer questions about banking, accounts, and finance. Be concise and friendly.',
+  };
+  const apiMessages = [systemMsg, ...messages.map((m) => ({ role: m.role, content: m.content }))];
+
+  try {
+    const hfRes = await fetch('https://router.huggingface.co/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${HF_TOKEN}`,
+      },
+      body: JSON.stringify({
+        model: `${HF_MODEL}:fastest`,
+        messages: apiMessages,
+        max_tokens: 512,
+        temperature: 0.7,
+      }),
+    });
+
+    const data = await hfRes.json();
+
+    if (!hfRes.ok) {
+      const errMsg = data.error?.message || data.message || 'Model request failed';
+      return res.status(hfRes.status).json({
+        message: typeof errMsg === 'string' ? errMsg : 'Model is loading, please try again in a moment',
+      });
+    }
+
+    const reply =
+      (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) || '';
+
+    res.status(200).json({ reply: reply.trim() });
+  } catch (err) {
+    console.error('Chat API error:', err);
+    res.status(500).json({ message: 'Failed to get response from AI. Please try again.' });
+  }
+});
+
 // API: Check balance
 app.get('/api/balance', authMiddleware, async (req, res) => {
   const username = req.user.username;

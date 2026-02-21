@@ -2,18 +2,100 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kodbank - Dashboard</title>
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="dashboard.css" />
   </head>
-  <body class="party-bg">
+  <body class="dashboard-bg">
     <div class="confetti-container" id="confettiContainer"></div>
-    <div class="card">
-      <h1>Welcome to Kodbank</h1>
-      <h2>User Dashboard</h2>
-      <button id="checkBalanceBtn" class="btn primary">Check Balance</button>
-      <p id="balanceMessage" class="message big"></p>
-    </div>
-    <script src="dashboard.js"></script>
-  </body>
-  </html>
 
+    <header class="dashboard-header">
+      <div class="header-content">
+        <h1>Kodbank</h1>
+        <div class="header-actions">
+          <button id="chatbotBtn" class="btn chatbot-btn" title="Chat Assistant">
+            <svg class="chat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+            Chat Assistant
+          </button>
+          <a href="/login.html" class="btn logout-btn">Logout</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="dashboard-main">
+      <section class="welcome-section">
+        <h2>Welcome back</h2>
+        <p class="welcome-subtitle">Manage your finances with ease</p>
+      </section>
+
+      <section class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon balance-icon">₹</div>
+          <div class="stat-content">
+            <span class="stat-label">Account Balance</span>
+            <span class="stat-value" id="balanceDisplay">—</span>
+          </div>
+          <button id="checkBalanceBtn" class="btn primary">Check Balance</button>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">📊</div>
+          <div class="stat-content">
+            <span class="stat-label">Account Status</span>
+            <span class="stat-value status-ok">Active</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🔒</div>
+          <div class="stat-content">
+            <span class="stat-label">Security</span>
+            <span class="stat-value status-ok">Protected</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="actions-section">
+        <h3>Quick Actions</h3>
+        <div class="actions-grid">
+          <div class="action-card">
+            <span class="action-icon">💳</span>
+            <span>Check Balance</span>
+            <button class="btn small" onclick="document.getElementById('checkBalanceBtn').click()">Go</button>
+          </div>
+          <div class="action-card">
+            <span class="action-icon">❓</span>
+            <span>Get Help</span>
+            <button class="btn small" id="helpChatBtn">Ask AI</button>
+          </div>
+        </div>
+      </section>
+
+      <p id="balanceMessage" class="message big"></p>
+    </main>
+
+    <!-- Chatbot Modal -->
+    <div id="chatbotModal" class="chatbot-modal" aria-hidden="true">
+      <div class="chatbot-panel">
+        <div class="chatbot-header">
+          <h3>Kodbank AI Assistant</h3>
+          <p class="chatbot-subtitle">Powered by Mistral 7B</p>
+          <button id="closeChatbotBtn" class="close-btn" aria-label="Close chat">&times;</button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages">
+          <div class="chat-message bot">
+            <p>Hello! I'm your Kodbank assistant. I can help answer questions about banking, your account, or general finance. How can I help you today?</p>
+          </div>
+        </div>
+        <div class="chatbot-input-area">
+          <input type="text" id="chatInput" placeholder="Type your message..." autocomplete="off" />
+          <button id="sendChatBtn" class="btn primary">Send</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+    <script src="chatbot.js"></script>
+  </body>
+</html>

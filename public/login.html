@@ -2,31 +2,74 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kodbank - Login</title>
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="auth.css" />
   </head>
-  <body class="gradient-bg">
-    <div class="card">
-      <h1>Kodbank</h1>
-      <h2>Login</h2>
+  <body class="auth-bg">
+    <div class="auth-card">
+      <div class="auth-header">
+        <div class="auth-logo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+            <line x1="1" y1="10" x2="23" y2="10"></line>
+            <line x1="7" y1="4" x2="7" y2="10"></line>
+            <line x1="17" y1="4" x2="17" y2="10"></line>
+          </svg>
+        </div>
+        <h1>Kodbank</h1>
+        <h2>Welcome back! Sign in to your account</h2>
+      </div>
+
       <form id="loginForm">
-        <div class="field">
+        <div class="field auth-field">
           <label for="uname">Username</label>
-          <input type="text" id="uname" name="uname" required />
+          <div class="auth-field-with-icon">
+            <div class="field-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </div>
+            <input type="text" id="uname" name="uname" placeholder="Enter your username" required />
+          </div>
         </div>
-        <div class="field">
+        <div class="field auth-field">
           <label for="password">Password</label>
-          <input type="password" id="password" name="password" required />
+          <div class="auth-field-with-icon">
+            <div class="field-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+            </div>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required />
+          </div>
         </div>
-        <button type="submit" class="btn primary">Login</button>
+        <button type="submit" class="btn primary">Sign In</button>
       </form>
+
       <p class="helper">
-        New to Kodbank?
-        <a href="/register.html">Register</a>
+        New to Kodbank? <a href="/register.html">Create an account</a>
       </p>
       <p id="loginMessage" class="message"></p>
+
+      <div class="auth-features">
+        <span class="auth-feature">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Secure
+        </span>
+        <span class="auth-feature">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Fast
+        </span>
+        <span class="auth-feature">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          AI Assistant
+        </span>
+      </div>
     </div>
     <script src="login.js"></script>
   </body>
-  </html>
-
+</html>
